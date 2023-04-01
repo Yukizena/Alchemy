@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Blocking
   - Player
   - Floor
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: walls
     uniqueID: 4126851027
+    locked: 0
+  - name: enemy
+    uniqueID: 1898719841
     locked: 0
   - name: player
     uniqueID: 4209860913

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e1c47addfe0814bba8c96d0685cb0f, type: 3}
+  m_Name: Hp posion potka
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3470696373970807242, guid: 35bda5d817e9128469ef58ee8868e36c, type: 3}
+  baza: 0
+  description: Potka ktora leczy cie natychmiastowo a potem truje
+  restore: 20
+  damage: 0
+  poison: 4

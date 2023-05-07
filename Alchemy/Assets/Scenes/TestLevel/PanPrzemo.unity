@@ -2080,6 +2080,7 @@ GameObject:
   - component: {fileID: 847682408}
   - component: {fileID: 847682407}
   - component: {fileID: 847682412}
+  - component: {fileID: 847682413}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -2096,9 +2097,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 847682406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42341f58d44d46b4eb0497b51908fda2, type: 3}
+  m_Script: {fileID: 11500000, guid: d42bac93628cc474586d18b8e1ea0e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 4
+  rb: {fileID: 847682409}
 --- !u!61 &847682408
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2226,6 +2229,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b08cf63f1135847a5354dc02ff7863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &847682413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847682406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1624762590aa9c44f9ab584711ab9722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  currentHealth: 0
+  invincibilityTime: 1
 --- !u!114 &910563315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7226,6 +7244,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6108141400123128524, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108141400123128524, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6108141400123128526, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -8729,6 +8755,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6108141400123128524, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108141400123128524, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6108141400123128526, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -9109,6 +9143,14 @@ PrefabInstance:
     - target: {fileID: 6108141400123128515, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108141400123128524, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108141400123128524, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
+      propertyPath: moveSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6108141400123128526, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
       propertyPath: m_RootOrder

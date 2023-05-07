@@ -58,4 +58,19 @@ public class Enemy : MonoBehaviour
             OnEnemyKilled?.Invoke(this);
         }
     }
+    // atakowanie gracza
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Atak gracza");
+            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent));
+            {
+                playerComponent.TakeDamage(1);
+                Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);
+                //Destroy(collision.gameObject);
+                //Destroy(gameObject);
+            }
+        }
+    }
 }

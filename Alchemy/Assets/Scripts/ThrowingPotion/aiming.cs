@@ -53,12 +53,14 @@ public class aiming : MonoBehaviour
             //zmniejszamy amunicje
             ammo--;
             //zmiana pozycji potki
-            Instantiate(potion, potionTransform.position, Quaternion.identity);
-            //usuwanie obiektu po 5 sekundach
-            Object.Destroy(potion, 5.0f);
+            GameObject newPotion=Instantiate(potion, potionTransform.position, Quaternion.identity);
+            //usuwanie obiektu po 3 sekundach
+           // Object.Destroy(newPotion, 3.0f);
         }
 
 
+
     }
+
 }
 

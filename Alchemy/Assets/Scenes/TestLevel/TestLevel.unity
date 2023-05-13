@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 273230216}
   - component: {fileID: 273230215}
   - component: {fileID: 273230214}
-  - component: {fileID: 273230219}
   - component: {fileID: 273230217}
   - component: {fileID: 273230218}
   m_Layer: 12
@@ -416,7 +415,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1898719841
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.8867924, g: 0.17150229, b: 0.17150229, a: 1}
@@ -675,7 +674,6 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -744,7 +742,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -85106383
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3625dc2fe646447438f38a2989cd8952, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -784,9 +782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820a628cd05b34344b788f899b7ac605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
-  currentHealth: 0
-  invincibilityTime: 1
 --- !u!1 &932556245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1536,6 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -168116269
   m_SortingLayer: 3
-  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

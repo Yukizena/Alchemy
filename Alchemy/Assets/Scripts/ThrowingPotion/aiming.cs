@@ -13,6 +13,7 @@ public class aiming : MonoBehaviour
     private float ammo;
     private float timer;
     public float timeBetweenFire;
+    bool canFire = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,17 +49,31 @@ public class aiming : MonoBehaviour
             }
         }
         //jeœli klikamy LPM i mamy amunicje
-        if(Input.GetMouseButton(0) && ammo>0)
+        if (Input.GetMouseButton(0) && ammo > 0 && canFire)
         {
             //zmniejszamy amunicje
             ammo--;
+
             //zmiana pozycji potki
-            Instantiate(potion, potionTransform.position, Quaternion.identity);
+            GameObject potionInstance = Instantiate(potion, potionTransform.position, Quaternion.identity);
+
             //usuwanie obiektu po 5 sekundach
-            Object.Destroy(potion, 5.0f);
+            Debug.Log("Niszczê Potkê");
+            Object.Destroy(potionInstance, 5.0f);
+
+            // ustawienie flagi informuj¹cej o tym, ¿e kolejny strza³ nie mo¿e byæ wykonany
+            canFire = false;
+
+            // uruchomienie funkcji, która po czasie timeBetweenFire ustawia flagê canFire na true
+            StartCoroutine(EnableFire(timeBetweenFire));
         }
+    }
 
-
+    // funkcja ustawiaj¹ca flagê canFire na true po okreœlonym czasie
+    private IEnumerator EnableFire(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canFire = true;
     }
 }
 

@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        Debug.Log("Jest Wróg");
         health = maxHealth;
         target = GameObject.Find("Player").transform;
     }
@@ -55,6 +56,21 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
             OnEnemyKilled?.Invoke(this);
+        }
+    }
+    // atakowanie gracza
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Atak gracza");
+            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent));
+            {
+                playerComponent.TakeDamage(1);
+                Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);
+                //Destroy(collision.gameObject);
+                //Destroy(gameObject);
+            }
         }
     }
 }

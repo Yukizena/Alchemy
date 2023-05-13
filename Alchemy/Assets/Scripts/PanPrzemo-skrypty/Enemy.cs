@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Jest Wróg");
+        //Debug.Log("Jest Wróg");
         health = maxHealth;
         target = GameObject.Find("Player").transform;
     }

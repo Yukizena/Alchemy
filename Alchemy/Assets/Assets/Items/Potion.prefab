@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 9025217451836172142}
   - component: {fileID: 4860062934173457912}
   - component: {fileID: 8684194116892092530}
-  m_Layer: 0
+  - component: {fileID: 6323799640702521814}
+  m_Layer: 8
   m_Name: Potion
   m_TagString: Potion
   m_Icon: {fileID: 0}
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -85106383
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: e796e7407e7913143b438e2fb61bc2c2, type: 3}
   m_Color: {r: 0.4056604, g: 0.3306515, b: 0.3306515, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &9025217451836172142
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a4b0b24487fad4bbd117608bc1ee7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potion: {fileID: 11400000, guid: 442e12c29bd3ce1449c967106faccf84, type: 2}
   force: 2
   Enemy: {fileID: 6108141400123128515, guid: 87ec4479bf2ee8941b9eb3165004963f, type: 3}
 --- !u!50 &4860062934173457912
@@ -139,7 +141,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
+    oldSize: {x: 0.64, y: 0.96}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -148,3 +150,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.17695725, y: 0.17599705}
   m_EdgeRadius: 0
+--- !u!95 &6323799640702521814
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642264119291041348}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bbc566dbebf5228428d87c72334abb9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

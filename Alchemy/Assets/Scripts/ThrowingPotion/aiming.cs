@@ -7,8 +7,8 @@ public class aiming : MonoBehaviour
     private Camera mainCam;
     private Vector3 mousePos;
     private Vector3 rotation;
-    public GameObject potion;
     public Transform potionTransform;
+    public GameObject potion;
     public float maxAmmo;
     private float ammo;
     private float timer;

@@ -4,57 +4,57 @@ using UnityEngine;
 
 public class potionScript : MonoBehaviour
 {
+    public Potion potion;
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
     public float force;
     public GameObject Enemy;
 
+    private int currentSpriteIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Rzucam Potkê");
+        //Debug.Log("Rzucam Potkê");
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //Poruszanie siê potki w okreœlonym celu
         rb = GetComponent<Rigidbody2D>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized*force;
+
+        // losowa potka
+        if (potion != null && potion.potionArt.Count > 0)
+        {
+            currentSpriteIndex = Random.Range(0, potion.potionArt.Count);
+
+            Sprite randomSprite = potion.potionArt[currentSpriteIndex];
+            GetComponent<SpriteRenderer>().sprite = randomSprite;
+            Debug.Log("Numer wybranej grafiki: " + currentSpriteIndex);
+            // Zaktualizuj indeks dla kolejnego rzutu potk¹
+            currentSpriteIndex = (currentSpriteIndex + 1) % potion.potionArt.Count;
+        }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Wejœcie w kolizje");
+        //Debug.Log("Wejœcie w kolizje");
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Wejœcie w kolizje z wrogiem");
+            //Debug.Log("Wejœcie w kolizje z wrogiem");
             if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponent))
             {
                 enemyComponent.TakeDamage(1);
-                Debug.Log("Wróg oberwa³");
+                //Debug.Log("Wróg oberwa³");
                 Destroy(collision.gameObject);
-                Debug.Log("Wróg zniszczony");
+                //Debug.Log("Wróg zniszczony");
                 Destroy(gameObject);
             }
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Enter collision with: " + other.name);
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Jest kolizja");
-            Destroy(other.gameObject);
-        }
-        else
-        {
-            Debug.Log("Brak kolizji");
-        }
-        // niszczenie potki
-        Destroy(gameObject);
-    }*/
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

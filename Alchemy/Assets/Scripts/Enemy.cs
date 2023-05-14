@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Atak gracza");
+            Debug.Log("Atak na gracza");
             if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent));
             {
                 playerComponent.TakeDamage(1);

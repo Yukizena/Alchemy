@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Enemy : MonoBehaviour   
+public class Boss : MonoBehaviour
 {
-    public static event Action<Enemy> OnEnemyKilled;
+    public static event Action<Boss> OnEnemyKilled;
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] float moveSpeed = 5f;
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
+
+    public GameObject projectilePrefab;
+    public float shootInterval = 2f;
 
     private void Awake()
     {
@@ -22,9 +25,12 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Jest Wróg");
+        Debug.Log("Jest Boss");
         health = maxHealth;
         target = GameObject.Find("Player").transform;
+
+        // Rozpocznij korutynê strzelania pociskami
+        StartCoroutine(ShootProjectileRoutine());
     }
 
     private void Update()
@@ -33,9 +39,9 @@ public class Enemy : MonoBehaviour
         {
             Vector3 direction = (target.position - transform.position).normalized;
             float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            
+
             moveDirection = direction;
-        } 
+        }
     }
 
     private void FixedUpdate()
@@ -55,20 +61,43 @@ public class Enemy : MonoBehaviour
         Debug.Log($"Damage Amount:{damageAmount}");
         health -= damageAmount;
         Debug.Log($"Health is now: {health}");
-        
+
         if (health <= 0)
         {
             Destroy(gameObject);
             OnEnemyKilled?.Invoke(this);
         }
     }
+
+    private IEnumerator ShootProjectileRoutine()
+    {
+        while (true)
+        {
+            // Strzelanie pociskiem
+            ShootProjectile();
+
+            // Odstêp czasowy
+            yield return new WaitForSeconds(shootInterval);
+        }
+    }
+
+    private void ShootProjectile()
+    {
+        // Tworzenie pocisku
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        // Dodawanie komponentu do pocisku, który bêdzie œledzi³ gracza
+        ProjectileTracking projectileTracking = projectile.AddComponent<ProjectileTracking>();
+        projectileTracking.target = target;
+    }
+
     // atakowanie gracza
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Atak na gracza");
-            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent));
+            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent)) ;
             {
                 playerComponent.TakeDamage(1);
                 Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);

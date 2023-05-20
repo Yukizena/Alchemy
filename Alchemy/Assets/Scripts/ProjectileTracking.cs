@@ -37,8 +37,10 @@ public class ProjectileTracking : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("pocisk:kolizja");
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("pocisk:kolizja z graczem");
             // Do not push the player
             rb.velocity = Vector2.zero;
 

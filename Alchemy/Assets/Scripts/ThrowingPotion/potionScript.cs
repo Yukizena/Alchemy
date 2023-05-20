@@ -31,9 +31,17 @@ public class potionScript : MonoBehaviour
             {
                 enemyComponent.TakeDamage(1);
                 Debug.Log("Wróg oberwa³");
-                Destroy(collision.gameObject);
-                Debug.Log("Wróg zniszczony");
                 Destroy(gameObject);
+            }
+        }
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            if (collision.gameObject.TryGetComponent<Boss>(out Boss bossComponent))
+            {
+                bossComponent.TakeDamage(1);
+                Debug.Log("Boss oberwa³");
+               
+                Destroy (gameObject);
             }
         }
     }

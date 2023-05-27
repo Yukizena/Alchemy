@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = startingHealth;
-        healthBar.setMaxHealth(startingHealth); 
+        healthBar.setMaxHealth(startingHealth);
     }
 
     public void TakeDamage(int damage)
@@ -48,4 +48,48 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Player died!");
     }
 
+    // obs³uga obra¿eñ od dziury
+    private Vector3 lastGoodPosition;
+    public bool backToGoodPosition = true;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Hole"))
+        {
+            // Czy mamy mo¿liwoœæ wejœcia w dziurê czy nie
+            if (backToGoodPosition)
+            {
+                TakeDamage(1);
+
+                // Przywrócenie gracza do pozycji obok dziury
+                Vector3 newPosition = transform.position;
+                Vector3 holePosition = other.transform.position;
+
+                //przesuwanie gracza w kierunku z którego przyszed³
+                if (holePosition.x < newPosition.x)
+                {
+                    newPosition.x += 0.3f; 
+                }
+                else if (holePosition.x > newPosition.x)
+                {
+                    newPosition.x -= 0.3f; 
+                }
+
+                if (holePosition.y < newPosition.y)
+                {
+                    newPosition.y += 0.3f; 
+                }
+                else if (holePosition.y > newPosition.y)
+                {
+                    newPosition.y -= 0.3f; 
+                }
+
+                transform.position = newPosition;
+            }
+            else
+            {
+                TakeDamage(1);
+            }
+        }
+    }
 }

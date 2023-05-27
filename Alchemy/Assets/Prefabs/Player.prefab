@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2bd3b857efdf64f9054637e0d3831b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 5
   currentHealth: 0
   invincibilityTime: 1
   healthBar: {fileID: 0}
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42341f58d44d46b4eb0497b51908fda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 4
   rb: {fileID: 1673317610830232309}
 --- !u!1 &1673317610968685651
 GameObject:

@@ -52,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
     private Vector3 lastGoodPosition;
     public bool backToGoodPosition = true;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Hole"))
         {
@@ -91,5 +91,5 @@ public class PlayerHealth : MonoBehaviour
                 TakeDamage(1);
             }
         }
-    }
+    }*/
 }

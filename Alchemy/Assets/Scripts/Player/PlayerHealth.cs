@@ -46,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
     {
         // Handle player death here (e.g. show game over screen)
         Debug.Log("Player died!");
+        GetComponent<Animator>().SetTrigger("Death");
     }
 
     // obs³uga obra¿eñ od dziury

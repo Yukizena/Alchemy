@@ -26,6 +26,21 @@ public class MovementTesting : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         moveDirection = new Vector2(moveX, moveY).normalized;
+        if(moveDirection.x < 0)
+        {
+            GetComponent<Animator>().SetBool("Left",true);
+            GetComponent<Animator>().SetBool("Right",false);
+        }
+        else if(moveDirection.x > 0)
+        {
+            GetComponent<Animator>().SetBool("Left", false);
+            GetComponent<Animator>().SetBool("Right", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("Left", false);
+            GetComponent<Animator>().SetBool("Right", false);
+        }
     }
 
     void Move()

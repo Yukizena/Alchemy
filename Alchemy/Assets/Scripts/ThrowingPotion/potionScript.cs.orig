@@ -46,7 +46,13 @@ public class potionScript : MonoBehaviour
             if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponent))
             {
                 enemyComponent.TakeDamage(1);
+<<<<<<< HEAD
+                Debug.Log("Wróg oberwa³");
+=======
                 //Debug.Log("Wróg oberwa³");
+                Destroy(collision.gameObject);
+                //Debug.Log("Wróg zniszczony");
+>>>>>>> origin/main
                 Destroy(gameObject);
             }
         }
@@ -61,25 +67,8 @@ public class potionScript : MonoBehaviour
             }
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Enter collision with: " + other.name);
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Jest kolizja");
-            Destroy(other.gameObject);
-        }
-        else
-        {
-            Debug.Log("Brak kolizji");
-        }
-        // niszczenie potki
-        Destroy(gameObject);
-    }*/
-    // Update is called once per frame
     void Update()
     {
 
-        
     }
 }

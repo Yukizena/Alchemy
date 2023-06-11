@@ -6,8 +6,11 @@ TagManager:
   tags:
   - Potion
   - Enemy
+<<<<<<< HEAD
   - Boss
+=======
   - Hole
+>>>>>>> origin/main
   layers:
   - Default
   - TransparentFX

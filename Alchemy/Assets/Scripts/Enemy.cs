@@ -12,10 +12,12 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
+    Vector3 savedScale = Vector3.one;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        savedScale = transform.localScale;
     }
 
 
@@ -45,9 +47,9 @@ public class Enemy : MonoBehaviour
             rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
         }
         if (moveDirection.x > 0)
-            transform.localScale = Vector3.one;
+            transform.localScale = savedScale;
         else if (moveDirection.x < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1 * savedScale.x, savedScale.y, savedScale.z);
     }
 
     public void TakeDamage(float damageAmount)
@@ -68,7 +70,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Atak na gracza");
-            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent));
+            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent))
             {
                 playerComponent.TakeDamage(1);
                 Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);

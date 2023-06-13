@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public float invincibilityTime = 1f;
     private bool isInvincible = false;
     public healthBar healthBar;
+    public bool isDead = false;
 
     private void Start()
     {
@@ -27,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
             healthBar.setHealth(currentHealth);
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && isDead==false)
         {
             Die();
         }
@@ -47,6 +49,14 @@ public class PlayerHealth : MonoBehaviour
         // Handle player death here (e.g. show game over screen)
         Debug.Log("Player died!");
         GetComponent<Animator>().SetTrigger("Death");
+        isDead = true;
+        
+    }
+
+    public void StopTime()
+    {
+        
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
 
     // obs³uga obra¿eñ od dziury

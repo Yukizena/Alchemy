@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEditorInternal;
-using Unity.VisualScripting;
 
 
 [CreateAssetMenu(fileName ="New inventory",menuName ="Inventory system")]

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6437643099720247574
+--- !u!1 &6589837180904547279
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7499268426359025516}
-  - component: {fileID: 5010946048598338591}
+  - component: {fileID: 1118838129067907476}
+  - component: {fileID: 8721084142732026726}
   m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7499268426359025516
+--- !u!4 &1118838129067907476
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6437643099720247574}
+  m_GameObject: {fileID: 6589837180904547279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.034, y: 0.003, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.011, y: -0.158, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8944227752621888378}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5010946048598338591
+--- !u!114 &8721084142732026726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6437643099720247574}
+  m_GameObject: {fileID: 6589837180904547279}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -47,10 +47,10 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.527
-  m_Color: {r: 0.17301531, g: 0.4528302, b: 0.188288, a: 1}
+  m_FalloffIntensity: 0.806
+  m_Color: {r: 0.9716981, g: 0.050418302, b: 0.08366017, a: 1}
   m_Intensity: 1
-  m_LightVolumeIntensity: 0.71
+  m_LightVolumeIntensity: 0.5
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 0.74
+  m_PointLightOuterRadius: 0.59
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -125,8 +125,8 @@ GameObject:
   - component: {fileID: 8944227752621888380}
   - component: {fileID: 7915626744127304998}
   m_Layer: 0
-  m_Name: Huge_Test_Object_Final
-  m_TagString: Enemy
+  m_Name: RegularEnemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,10 +140,10 @@ Transform:
   m_GameObject: {fileID: 8944227752621888375}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.964859, y: 1.9345461, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7499268426359025516}
+  - {fileID: 1118838129067907476}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -188,7 +188,7 @@ SpriteRenderer:
   m_SortingLayerID: 1898719841
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 20bf8c341ca76cf408babe5633c473e7, type: 3}
+  m_Sprite: {fileID: 389532404, guid: 1e34c8c70e084704f93bc0fda2e55525, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -212,18 +212,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014320374, y: -0.02478689}
+  m_Offset: {x: 0.011408806, y: -0.101039365}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.773407, y: 1.099542}
+  m_Size: {x: 0.165586, y: 0.40652236}
   m_EdgeRadius: 0
 --- !u!50 &8944227752621888380
 Rigidbody2D:
@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4575a85251b28204781791ed62e7c63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 0
   maxHealth: 3
-  moveSpeed: 0
+  moveSpeed: 1
   projectilePrefab: {fileID: 4642264119291041348, guid: 019abd99523817a438df03b3c3382e0e, type: 3}
   shootInterval: 2

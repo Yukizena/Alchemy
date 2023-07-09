@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8944227752621888380}
   - component: {fileID: 7915626744127304998}
   m_Layer: 0
-  m_Name: RegularEnemy
+  m_Name: ShootingEnemy
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,5 +261,5 @@ MonoBehaviour:
   health: 0
   maxHealth: 3
   moveSpeed: 1
-  projectilePrefab: {fileID: 4642264119291041348, guid: 019abd99523817a438df03b3c3382e0e, type: 3}
-  shootInterval: 2
+  fireball: {fileID: 4642264119291041348, guid: 019abd99523817a438df03b3c3382e0e, type: 3}
+  shootInterval: 5

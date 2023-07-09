@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Enemy : MonoBehaviour   
+public class RegularEnemy : MonoBehaviour
 {
-    public static event Action<Enemy> OnEnemyKilled;
+    public static event Action<RegularEnemy> OnEnemyKilled;
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float detectionRange = 10f; // Odleg³oœæ, w której wróg zaczyna œledziæ gracza
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
@@ -20,11 +21,8 @@ public class Enemy : MonoBehaviour
         savedScale = transform.localScale;
     }
 
-
-    // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Jest Wróg");
         health = maxHealth;
         target = GameObject.Find("Player").transform;
     }
@@ -33,11 +31,20 @@ public class Enemy : MonoBehaviour
     {
         if (target)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            
-            moveDirection = direction;
-        } 
+            float distanceToPlayer = Vector2.Distance(transform.position, target.position);
+
+            if (distanceToPlayer <= detectionRange)
+            {
+                Vector3 direction = (target.position - transform.position).normalized;
+                float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+
+                moveDirection = direction;
+            }
+            else
+            {
+                moveDirection = Vector2.zero;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -54,28 +61,23 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        Debug.Log($"Damage Amount:{damageAmount}");
         health -= damageAmount;
-        Debug.Log($"Health is now: {health}");
-        
+
         if (health <= 0)
         {
             Destroy(gameObject);
             OnEnemyKilled?.Invoke(this);
         }
     }
-    // atakowanie gracza
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Atak na gracza");
             if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent))
             {
                 playerComponent.TakeDamage(1);
                 Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);
-                //Destroy(collision.gameObject);
-                //Destroy(gameObject);
             }
         }
     }

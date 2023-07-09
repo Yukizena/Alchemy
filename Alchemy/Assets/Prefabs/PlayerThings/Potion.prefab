@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a4b0b24487fad4bbd117608bc1ee7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion: {fileID: 11400000, guid: 442e12c29bd3ce1449c967106faccf84, type: 2}
+  potionsCollection: {fileID: 11400000, guid: 442e12c29bd3ce1449c967106faccf84, type: 2}
   force: 3
   Enemy: {fileID: 7484476230292691003, guid: 65e3b9105d164ff4fb053f7d5cfcb008, type: 3}
 --- !u!50 &4860062934173457912

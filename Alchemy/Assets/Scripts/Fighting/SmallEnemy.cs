@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Boss : MonoBehaviour
+public class SmallEnemy : MonoBehaviour
 {
-    public static event Action<Boss> OnEnemyKilled;
+    public static event Action<SmallEnemy> OnEnemyKilled;
     [SerializeField] float health, maxHealth = 3f;
-
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float detectionRange = 10f; // Odleg³oœæ, w której wróg zaczyna œledziæ gracza
+    [SerializeField] float moveSpeed = 1f;
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
     Vector3 savedScale = Vector3.one;
 
-    public GameObject projectilePrefab;
+    public GameObject fireball;
     public float shootInterval = 2f;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Jest Boss");
+        //Debug.Log("Jest Boss");
         health = maxHealth;
         target = GameObject.Find("Player").transform;
 
@@ -37,12 +37,22 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
+        //szukanie gracza tylko w pewnej odleg³oœci
         if (target)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 
-            moveDirection = direction;
+            if (distanceToPlayer <= detectionRange)
+            {
+                Vector3 direction = (target.position - transform.position).normalized;
+                float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+
+                moveDirection = direction;
+            }
+            else
+            {
+                moveDirection = Vector2.zero;
+            }
         }
     }
 
@@ -60,9 +70,9 @@ public class Boss : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        Debug.Log($"Damage Amount:{damageAmount}");
+        //Debug.Log($"Damage Amount:{damageAmount}");
         health -= damageAmount;
-        Debug.Log($"Health is now: {health}");
+       // Debug.Log($"Health is now: {health}");
 
         if (health <= 0)
         {
@@ -86,11 +96,14 @@ public class Boss : MonoBehaviour
     private void ShootProjectile()
     {
         // Tworzenie pocisku
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(fireball, transform.position, Quaternion.identity);
 
         // Dodawanie komponentu do pocisku, który bêdzie œledzi³ gracza
         ProjectileTracking projectileTracking = projectile.AddComponent<ProjectileTracking>();
         projectileTracking.target = target;
+
+        // Zniszczenie pocisku po pewnym czasie
+        Destroy(projectile, shootInterval);
     }
 
     // atakowanie gracza
@@ -98,13 +111,11 @@ public class Boss : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Atak na gracza");
+            //Debug.Log("Atak na gracza");
             if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent))
             {
                 playerComponent.TakeDamage(1);
                 Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);
-                //Destroy(collision.gameObject);
-                //Destroy(gameObject);
             }
         }
     }

@@ -1,85 +1,147 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class potionScript : MonoBehaviour
 {
-    public Potion potion;
+    public Potion potionsCollection;
+    private int selectedPotionIndex;
+
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
     public float force;
     public GameObject Enemy;
 
-    private int currentSpriteIndex = 0;
-    // Start is called before the first frame update
-    void Start()
+    //dodanie animatora
+    private Animator animator;
+    private void Start()
     {
-        //Debug.Log("Rzucam Potkê");
+       //pobranie kamery
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        //Poruszanie siê potki w okreœlonym celu
+        // pobranie rigidbody potki
         rb = GetComponent<Rigidbody2D>();
+        //strza³ w kierunku wychylenia myszki
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
-        rb.velocity = new Vector2(direction.x, direction.y).normalized*force;
+        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
 
-        // losowa potka
-        if (potion != null && potion.potionArt.Count > 0)
+        // Defaultowy wygl¹d potki
+        selectedPotionIndex = 0;
+        if (potionsCollection.potionArt.Count > 0)
         {
-            currentSpriteIndex = Random.Range(0, potion.potionArt.Count);
+            Sprite selectedSprite = potionsCollection.potionArt[selectedPotionIndex];
+            GetComponent<SpriteRenderer>().sprite = selectedSprite;
+        }
 
-            Sprite randomSprite = potion.potionArt[currentSpriteIndex];
-            GetComponent<SpriteRenderer>().sprite = randomSprite;
-            Debug.Log("Numer wybranej grafiki: " + currentSpriteIndex);
-            // Zaktualizuj indeks dla kolejnego rzutu potk¹
-            currentSpriteIndex = (currentSpriteIndex + 1) % potion.potionArt.Count;
+        // Pobierz komponent Animator
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        //wybieranie potki na bazie wciœniêtych klawiszy 1-5
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectPotion(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectPotion(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectPotion(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SelectPotion(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SelectPotion(4);
         }
     }
 
+    //funkcja do wybierania potki i przypisywania odpowiedniego indeksu
+    public void SelectPotion(int index)
+    {
+        if (index >= 0 && index < potionsCollection.potionArt.Count)
+        {
+            selectedPotionIndex = index;
+            Debug.Log("Wybrano potkê o indeksie: " + selectedPotionIndex);
 
+            // Zaktualizuj sprite potki na podstawie wybranego indeksu
+            if (potionsCollection.potionArt.Count > 0)
+            {
+                Sprite selectedSprite = potionsCollection.potionArt[selectedPotionIndex];
+                GetComponent<SpriteRenderer>().sprite = selectedSprite;
+            }
+        }
+        else
+        {
+            Debug.Log("B³êdny indeks potki!");
+        }
+    }
+
+    //zderzenie siê potki z wrogami lub map¹
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("Wejœcie w kolizje");
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //Debug.Log("Wejœcie w kolizje z wrogiem");
-            if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponent))
+            if (collision.gameObject.TryGetComponent<RegularEnemy>(out RegularEnemy enemyComponent))
             {
                 enemyComponent.TakeDamage(1);
-                //Debug.Log("Wróg oberwa³");
+                // Zniszcz obiekt
                 Destroy(gameObject);
+
+                // Wywo³aj animacjê wybuchu dla konkretnej potki po pewnym czasie
+                StartCoroutine(ExplodeAnimation(selectedPotionIndex));
+
             }
         }
         if (collision.gameObject.CompareTag("Boss"))
         {
-            if (collision.gameObject.TryGetComponent<Boss>(out Boss bossComponent))
+            if (collision.gameObject.TryGetComponent<SmallEnemy>(out SmallEnemy bossComponent))
             {
                 bossComponent.TakeDamage(1);
-                Debug.Log("Boss oberwa³");
-               
-                Destroy (gameObject);
+                //Debug.Log("Boss oberwa³");
+                // Zniszcz obiekt
+                Destroy(gameObject);
+
+                // Wywo³aj animacjê wybuchu dla konkretnej potki po pewnym czasie
+                StartCoroutine(ExplodeAnimation(selectedPotionIndex));
             }
         }
-    }
-    /*private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Enter collision with: " + other.name);
-        if (other.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.GetComponent<TilemapCollider2D>() != null)
         {
-            Debug.Log("Jest kolizja");
-            Destroy(other.gameObject);
-        }
-        else
-        {
-            Debug.Log("Brak kolizji");
-        }
-        // niszczenie potki
-        Destroy(gameObject);
-    }*/
-    // Update is called once per frame
-    void Update()
-    {
+            // Zniszcz obiekt
+            Destroy(gameObject);
 
-        
+            // Wywo³aj animacjê wybuchu dla konkretnej potki po pewnym czasie
+            StartCoroutine(ExplodeAnimation(selectedPotionIndex));
+        }
+    }
+
+    //aktywowanie eksplozji potki po uderzeniu
+    private IEnumerator ExplodeAnimation(int animationIndex)
+    {
+        // Poczekaj chwilê przed odtworzeniem animacji
+        yield return new WaitForSeconds(0.1f);
+
+        // Odtwórz animacjê wybuchu
+        animator.SetInteger("AnimationIndex", animationIndex);
+        animator.SetTrigger("Explode");
+
+        // Poczekaj na zakoñczenie animacji
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
+
+        // Zniszcz obiekt, jeœli jeszcze istnieje (np. animacja zosta³a przerwana)
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }
+

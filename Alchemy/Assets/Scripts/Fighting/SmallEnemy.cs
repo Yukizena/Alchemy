@@ -5,7 +5,7 @@ using System;
 
 public class SmallEnemy : MonoBehaviour
 {
-    public static event Action<SmallEnemy> OnEnemyKilled;
+    public Action<SmallEnemy> OnEnemyKilled;
     [SerializeField] float health, maxHealth = 3f;
     [SerializeField] float detectionRange = 10f; // Odleg³oœæ, w której wróg zaczyna œledziæ gracza
     [SerializeField] float moveSpeed = 1f;

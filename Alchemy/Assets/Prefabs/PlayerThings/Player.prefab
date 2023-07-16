@@ -434,3 +434,4 @@ MonoBehaviour:
   potionTransform: {fileID: 1673317610122210115}
   maxAmmo: 3
   timeBetweenFire: 0.5
+  potionsCollection: {fileID: 11400000, guid: 442e12c29bd3ce1449c967106faccf84, type: 2}

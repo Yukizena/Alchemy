@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class potionScript : MonoBehaviour
+public class PotionScript : MonoBehaviour
 {
     public Potion potionsCollection;
     private int selectedPotionIndex;
@@ -26,64 +26,16 @@ public class potionScript : MonoBehaviour
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
-
-        // Defaultowy wygl¹d potki
-        selectedPotionIndex = 0;
-        if (potionsCollection.potionArt.Count > 0)
-        {
-            Sprite selectedSprite = potionsCollection.potionArt[selectedPotionIndex];
-            GetComponent<SpriteRenderer>().sprite = selectedSprite;
-        }
-
         // Pobierz komponent Animator
         animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        //wybieranie potki na bazie wciœniêtych klawiszy 1-5
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SelectPotion(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SelectPotion(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SelectPotion(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SelectPotion(3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SelectPotion(4);
-        }
+
     }
 
-    //funkcja do wybierania potki i przypisywania odpowiedniego indeksu
-    public void SelectPotion(int index)
-    {
-        if (index >= 0 && index < potionsCollection.potionArt.Count)
-        {
-            selectedPotionIndex = index;
-            Debug.Log("Wybrano potkê o indeksie: " + selectedPotionIndex);
-
-            // Zaktualizuj sprite potki na podstawie wybranego indeksu
-            if (potionsCollection.potionArt.Count > 0)
-            {
-                Sprite selectedSprite = potionsCollection.potionArt[selectedPotionIndex];
-                GetComponent<SpriteRenderer>().sprite = selectedSprite;
-            }
-        }
-        else
-        {
-            Debug.Log("B³êdny indeks potki!");
-        }
-    }
+  
 
     //zderzenie siê potki z wrogami lub map¹
     private void OnCollisionEnter2D(Collision2D collision)
@@ -121,6 +73,11 @@ public class potionScript : MonoBehaviour
 
             // Wywo³aj animacjê wybuchu dla konkretnej potki po pewnym czasie
             StartCoroutine(ExplodeAnimation(selectedPotionIndex));
+        }
+        //przenikanie fireballa
+        if (collision.gameObject.CompareTag("Fireball"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
         }
     }
 

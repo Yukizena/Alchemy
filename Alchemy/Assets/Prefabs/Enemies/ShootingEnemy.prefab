@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1118838129067907476}
   - component: {fileID: 8721084142732026726}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 8944227752621888379}
   - component: {fileID: 8944227752621888380}
   - component: {fileID: 7915626744127304998}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShootingEnemy
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 3
+  detectionRange: 10
   moveSpeed: 1
   fireball: {fileID: 4642264119291041348, guid: 019abd99523817a438df03b3c3382e0e, type: 3}
   shootInterval: 5

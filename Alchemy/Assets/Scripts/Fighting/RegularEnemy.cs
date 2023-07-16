@@ -5,7 +5,7 @@ using System;
 
 public class RegularEnemy : MonoBehaviour
 {
-    public static event Action<RegularEnemy> OnEnemyKilled;
+    public Action<RegularEnemy> OnEnemyKilled;
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] float moveSpeed = 5f;

@@ -109,9 +109,10 @@ public class SmallEnemy : MonoBehaviour
     // atakowanie gracza
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Kolizja z " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Player"))
         {
-            //Debug.Log("Atak na gracza");
+            Debug.Log("Atak na gracza");
             if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent))
             {
                 playerComponent.TakeDamage(1);

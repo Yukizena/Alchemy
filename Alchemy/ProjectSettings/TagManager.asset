@@ -9,6 +9,7 @@ TagManager:
   - Boss
   - Hole
   - Fireball
+  - spawner
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - IgnoreEnemies
   - Enemies
   - Fireball
-  - 
-  - 
+  - spawner
+  - Potion
   - 
   - 
   - 

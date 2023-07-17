@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: -4776195548197953823}
   - component: {fileID: -4976745930964377467}
   - component: {fileID: 6078927157509241721}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ShootingEnemySpawner
-  m_TagString: Enemy
+  m_TagString: spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

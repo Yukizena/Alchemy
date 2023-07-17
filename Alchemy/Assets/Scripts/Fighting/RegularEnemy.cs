@@ -70,15 +70,28 @@ public class RegularEnemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    Debug.Log("Kolizja z " + collision.gameObject.tag, gameObject);
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+
+    //        //Debug.Log("Kolizja z graczem");
+    //        if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent))
+    //        {
+    //            playerComponent.TakeDamage(1);
+    //            Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);
+    //        }
+    //    }
+    //}
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        //Debug.Log("Kolizja z " + collision.gameObject.tag, gameObject);
+        if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent))
         {
-            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComponent))
-            {
-                playerComponent.TakeDamage(1);
-                Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);
-            }
+            Debug.Log("Kolizja z " + collision.gameObject.tag, gameObject);
+            playerComponent.TakeDamage(1);
+            Debug.Log("Gracz oberwa³. Aktualne zdrowie: " + playerComponent.currentHealth);
         }
     }
 }

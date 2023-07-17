@@ -53,6 +53,19 @@ public class PotionScript : MonoBehaviour
 
             }
         }
+        if (collision.gameObject.CompareTag("spawner"))
+        {
+            if (collision.gameObject.TryGetComponent<SpawnHealth>(out SpawnHealth enemyComponent))
+            {
+                enemyComponent.TakeDamage(1);
+                // Zniszcz obiekt
+                Destroy(gameObject);
+
+                // Wywo³aj animacjê wybuchu dla konkretnej potki po pewnym czasie
+                StartCoroutine(ExplodeAnimation(selectedPotionIndex));
+
+            }
+        }
         if (collision.gameObject.CompareTag("Boss"))
         {
             if (collision.gameObject.TryGetComponent<SmallEnemy>(out SmallEnemy bossComponent))

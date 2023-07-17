@@ -10,7 +10,6 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRange = 5f;   // Zakres losowego po³o¿enia spawnu
 
     private int currentEnemyCount = 0;   // Aktualna liczba wrogów
-
     // Start is called before the first frame update
     void Start()
     {
